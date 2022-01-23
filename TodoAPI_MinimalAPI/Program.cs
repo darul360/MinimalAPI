@@ -18,10 +18,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.MapGet("/tasksList", (ITasksService service) => service.GetAllTasks());
-app.MapGet("/tasksList/{id}", (ITasksService service, [FromRoute]Guid id) => service.GetSpecificTask(id));
-app.MapPost("/tasksList", (ITasksService service, [FromBody] TodoAPI_MinimalAPI.Model.Task task ) => service.CreateTask(task));
-app.MapPut("/tasksList", (ITasksService service, [FromBody] TodoAPI_MinimalAPI.Model.Task task) => service.ModifyTask(task));
-app.MapDelete("/tasksList/{id}", (ITasksService service, [FromRoute] Guid id) => service.RemoveTask(id));
+TasksRequests.EndpointsManager(app);
 
 app.Run();
